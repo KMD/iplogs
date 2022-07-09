@@ -42,7 +42,7 @@ def main():
         EVENTS_PER_SECOND,
         TOTAL_AMOUNT_OF_BYTES_EXCHANGED,
     ]
-    allowed_types = ["squid"]
+    allowed_types = [SQUID]
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "-f",
