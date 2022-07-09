@@ -68,10 +68,18 @@ def main():
 
     # do the magic
     if args.type == SQUID:
-        factory = squid.Squid()
+        if os.path.isdir(args.files):
+            files = [f"{args.files}/{file}" for file in os.listdir(args.files)]
+        else:
+            files = args.files.split(";")
+        factory = squid.Squid(files)
 
     if args.action == MOST_FREQUENT_IP:
         result = factory.most_frequent_IP()
+        print(result.json())
+
+    if args.action == LEAST_FREQUENT_IP:
+        result = factory.least_frequent_IP()
         print(result.json())
 
 
