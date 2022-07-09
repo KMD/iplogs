@@ -1,5 +1,16 @@
 # iplogs
 ## Usage
+
+```git clone git@github.com:KMD/iplogs.git```
+
+```cd iplogs```
+
+```python3 -m venv env```
+
+```source env/bin/activate```
+
+```pip install -r requirements.txt```
+
 ## Usage with docker
 ## Tutorial
 
