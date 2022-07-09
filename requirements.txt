@@ -1,0 +1,2 @@
+docstring-parser==0.14.1
+pedantic==1.11.1
