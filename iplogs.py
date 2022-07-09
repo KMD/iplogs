@@ -2,6 +2,17 @@ import os
 import sys
 import argparse
 
+from sources import squid
+
+# some constants
+# types of logs
+SQUID = "squid"
+# actions
+MOST_FREQUENT_IP = "MostFrequentIP"
+LEAST_FREQUENT_IP = "LeastFrequentIP"
+EVENTS_PER_SECOND = "EventsPerSecond"
+TOTAL_AMOUNT_OF_BYTES_EXCHANGED = "TotalAmountOfBytesExchanged"
+
 
 def is_file(files: str) -> bool:
     """
@@ -26,10 +37,10 @@ def is_file(files: str) -> bool:
 def main():
     # handle arguments
     allowed_actions = [
-        "MostFrequentIP",
-        "LeastFrequentIP",
-        "EventsPerSecond",
-        "TotalAmountOfBytesExchanged",
+        MOST_FREQUENT_IP,
+        LEAST_FREQUENT_IP,
+        EVENTS_PER_SECOND,
+        TOTAL_AMOUNT_OF_BYTES_EXCHANGED,
     ]
     allowed_types = ["squid"]
     parser = argparse.ArgumentParser()
@@ -43,7 +54,7 @@ def main():
         "-a", "--action", help=f"Actions: {', '.join(allowed_actions)}", required=True
     )
     parser.add_argument(
-        "-t", "--type", help="Type of log file, default is 'squid'", default="squid"
+        "-t", "--type", help=f"Type of log file, default is '{SQUID}'", default=SQUID
     )
     args = parser.parse_args()
     if args.action not in allowed_actions:
@@ -54,6 +65,14 @@ def main():
         sys.exit(f"-t/--type not allowed, allowed types: {', '.join(allowed_types)}")
     if not (os.path.isdir(args.files) or is_file(args.files)):
         sys.exit(f"-f/--files not allowed, are not valid files or directory")
+
+    # do the magic
+    if args.type == SQUID:
+        factory = squid.Squid()
+
+    if args.action == MOST_FREQUENT_IP:
+        result = factory.most_frequent_IP()
+        print(result.json())
 
 
 if __name__ == "__main__":
