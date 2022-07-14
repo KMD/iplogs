@@ -1,3 +1,4 @@
+from ast import arg
 import os
 import sys
 import argparse
@@ -80,6 +81,14 @@ def main():
 
     if args.action == LEAST_FREQUENT_IP:
         result = factory.least_frequent_IP()
+        print(result.json())
+
+    if args.action == EVENTS_PER_SECOND:
+        result = factory.events_per_second()
+        print(result.json())
+
+    if args.action == TOTAL_AMOUNT_OF_BYTES_EXCHANGED:
+        result = factory.total_amount_of_bytes_exchanged()
         print(result.json())
 
 

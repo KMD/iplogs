@@ -17,7 +17,7 @@ class ResponseIP(Response):
 
 
 class ResponseEvents(Response):
-    no_events: int
+    no_events: float
 
 
 class ResponseBytes(Response):
